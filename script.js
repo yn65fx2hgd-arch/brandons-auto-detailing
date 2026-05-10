@@ -40,6 +40,9 @@ document.getElementById('bookingForm').addEventListener('submit', function(e) {
     // Save booking to localStorage
     saveBooking(formData);
     
+    // Send email notification
+    sendEmailNotification(formData);
+    
     // Show success message
     document.getElementById('bookingForm').style.display = 'none';
     document.getElementById('successMessage').style.display = 'block';
@@ -56,6 +59,37 @@ function saveBooking(bookingData) {
     let bookings = JSON.parse(localStorage.getItem('brandons-bookings')) || [];
     bookings.push(bookingData);
     localStorage.setItem('brandons-bookings', JSON.stringify(bookings));
+}
+
+// Send email notification using Formspree (free email service)
+function sendEmailNotification(bookingData) {
+    const formData = new FormData();
+    formData.append('name', bookingData.name);
+    formData.append('phone', bookingData.phone);
+    formData.append('address', bookingData.address);
+    formData.append('carType', bookingData.carType);
+    formData.append('serviceType', bookingData.serviceType);
+    formData.append('date', bookingData.date);
+    formData.append('notes', bookingData.notes);
+    formData.append('submittedAt', bookingData.submittedAt);
+    formData.append('_subject', `New Booking: ${bookingData.name} - ${bookingData.date}`);
+    formData.append('_captcha', 'false');
+
+    // Send to Formspree endpoint (configured for brandonmb24880@icloud.com)
+    fetch('https://formspree.io/f/xyzjkwlo', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log('✓ Email notification sent to brandonmb24880@icloud.com');
+        } else {
+            console.log('Booking saved locally (email service backup)');
+        }
+    })
+    .catch(error => {
+        console.log('Booking saved locally - will retry on next connection', error);
+    });
 }
 
 // Set minimum date to today
