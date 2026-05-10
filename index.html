@@ -18,7 +18,7 @@
                 <h2>Book Your Detail Appointment</h2>
                 <p class="info-text">Fill out the form below and we'll confirm your booking as soon as possible.</p>
                 
-                <form id="bookingForm" class="booking-form">
+                <form id="bookingForm" class="booking-form" action="https://formspree.io/f/xdabpgol" method="POST">
                     <div class="form-group">
                         <label for="name">Full Name *</label>
                         <input type="text" id="name" name="name" required placeholder="John Doe">
@@ -61,6 +61,9 @@
                         <label for="notes">Additional Notes</label>
                         <textarea id="notes" name="notes" placeholder="Any special requests or details about your vehicle..."></textarea>
                     </div>
+
+                    <input type="hidden" name="_subject" value="New Brandon's Auto Detailing Booking">
+                    <input type="hidden" name="_captcha" value="false">
 
                     <button type="submit" class="submit-btn">Book Appointment</button>
                 </form>
