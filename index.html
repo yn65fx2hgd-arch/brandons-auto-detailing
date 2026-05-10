@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brandon's Auto Detailing - Book Your Appointment</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚗 Brandon's Auto Detailing</h1>
+            <p class="tagline">Mobile Car Detailing Service</p>
+        </header>
+
+        <main>
+            <section class="booking-section">
+                <h2>Book Your Detail Appointment</h2>
+                <p class="info-text">Fill out the form below and we'll confirm your booking as soon as possible.</p>
+                
+                <form id="bookingForm" class="booking-form">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="name" required placeholder="John Doe">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" required placeholder="(555) 123-4567">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">Service Address *</label>
+                        <input type="text" id="address" name="address" required placeholder="123 Main Street, City, State ZIP">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="carType">Car Type/Model *</label>
+                        <input type="text" id="carType" name="carType" required placeholder="e.g., 2020 Honda Civic">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="serviceType">Service Type *</label>
+                        <select id="serviceType" name="serviceType" required>
+                            <option value="">-- Select a service --</option>
+                            <option value="basic">Basic Wash & Dry</option>
+                            <option value="standard">Standard Detail</option>
+                            <option value="premium">Premium Detail</option>
+                            <option value="interior">Interior Detail</option>
+                            <option value="exterior">Exterior Detail</option>
+                            <option value="ceramic">Ceramic Coating</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date">Preferred Date *</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="notes">Additional Notes</label>
+                        <textarea id="notes" name="notes" placeholder="Any special requests or details about your vehicle..."></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Book Appointment</button>
+                </form>
+
+                <div id="successMessage" class="success-message" style="display: none;">
+                    <h3>✓ Booking Submitted!</h3>
+                    <p>Thank you for booking with Brandon's Auto Detailing! We'll contact you shortly to confirm your appointment.</p>
+                    <p><strong>Your booking details have been saved.</strong></p>
+                </div>
+            </section>
+
+            <section class="info-section">
+                <h3>Why Choose Brandon's?</h3>
+                <ul class="benefits">
+                    <li>✓ Professional Mobile Service - We Come to You</li>
+                    <li>✓ High Quality Products & Equipment</li>
+                    <li>✓ Experienced Detailers</li>
+                    <li>✓ Fast & Reliable Service</li>
+                    <li>✓ Affordable Pricing</li>
+                </ul>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 Brandon's Auto Detailing. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
