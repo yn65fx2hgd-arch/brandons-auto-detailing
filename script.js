@@ -61,47 +61,37 @@ function saveBooking(bookingData) {
     localStorage.setItem('brandons-bookings', JSON.stringify(bookings));
 }
 
-// Send email notification using EmailJS (free service)
+// Send email notification using Formspree
 function sendEmailNotification(bookingData) {
-    // Email template data
-    const templateParams = {
-        to_email: 'brandonmb24880@icloud.com',
-        from_email: 'brandonmh24880@gmail.com',
-        customer_name: bookingData.name,
-        customer_phone: bookingData.phone,
-        customer_address: bookingData.address,
-        car_type: bookingData.carType,
-        service_type: bookingData.serviceType,
-        preferred_date: bookingData.date,
-        notes: bookingData.notes || 'None',
-        submitted_at: bookingData.submittedAt,
-        subject: `New Booking: ${bookingData.name} - ${bookingData.date}`
-    };
+    const formData = new FormData();
+    formData.append('name', bookingData.name);
+    formData.append('phone', bookingData.phone);
+    formData.append('address', bookingData.address);
+    formData.append('carType', bookingData.carType);
+    formData.append('serviceType', bookingData.serviceType);
+    formData.append('date', bookingData.date);
+    formData.append('notes', bookingData.notes || 'None');
+    formData.append('submittedAt', bookingData.submittedAt);
+    formData.append('_subject', `New Booking: ${bookingData.name} - ${bookingData.date}`);
+    formData.append('_captcha', 'false');
 
-    // Send via simple POST request to a webhook service
-    fetch('https://api.staticforms.xyz/submit', {
+    // Send to Formspree - configure at formspree.io
+    fetch('https://formspree.io/f/mzbnbgpp', {
         method: 'POST',
+        body: formData,
         headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            name: bookingData.name,
-            email: 'brandonmb24880@icloud.com',
-            phone: bookingData.phone,
-            address: bookingData.address,
-            carType: bookingData.carType,
-            serviceType: bookingData.serviceType,
-            date: bookingData.date,
-            notes: bookingData.notes,
-            submittedAt: bookingData.submittedAt,
-            accessKey: '8db5da45-f84e-4b68-85fb-a8b1d7c5e9f2'
-        })
+            'Accept': 'application/json'
+        }
     })
     .then(response => {
-        console.log('✓ Booking email sent successfully');
+        if (response.ok) {
+            console.log('✓ Email notification sent successfully');
+        } else {
+            console.log('Email service response received');
+        }
     })
     .catch(error => {
-        console.log('Booking saved locally - email will be resent', error);
+        console.log('Booking saved locally (email service note):', error);
     });
 }
 
